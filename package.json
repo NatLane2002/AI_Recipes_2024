@@ -1,0 +1,16 @@
+{
+  "name": "ai_recipes_2024",
+  "version": "1.0.0",
+  "description": "This repo contains all the code written for my ai recipes project i came up with",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "openai": "^4.26.0"
+  }
+}
