@@ -1,0 +1,48 @@
+<!-- mealPlan.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="icon" type="image/png" href="/myicon.jpg" />
+        <title>AI Meal Plans</title>
+        <%- include('./partials/styles.ejs') %> <%- include('./partials/head.ejs')
+        %>
+    </head>
+    <body>
+        <div class="container">
+            <div class="alignLeft">
+            <h1><u>Generated Meal Plan</u></h1>
+
+                <% if (mealPlan) { %>
+                    <p><%- mealPlan %></p> <!-- Use <%- %> to render HTML -->
+                <% } else { %>
+                    <p>No meal plan generated.</p>
+                <% } %>
+            </div>
+
+            <form action="/recipe" method="post">
+                <h3>Would you like to get a recipe for any of the meals? Enter the meal below!</h3>
+                <!-- <label for="meals">Meal:</label> -->
+                <textarea id="meals" name="meals" required></textarea>
+                <h6 class="loadingMsg">*Be patient - Loading may take up to 30 seconds*</h6>
+                <button type="submit">Get Recipe</button>
+            </form>
+
+            <form action="/meal-planner/email" method="post">
+                <h3>Would you like to receive this meal plan directly in your inbox? Enter your email below!</h3>
+                <!-- <label for="email">Email:</label> -->
+                <h6 class="loadingMsg">*Please stay on this page for at least 10 seconds to ensure you recieve your meal plan*</h6>
+                <input type="email" id="email" name="email" required>
+
+                <input type="hidden" name="mealPlan" value="<%= mealPlan %>">
+
+                <button type="submit">Send Meal Plan</button>
+            </form>
+
+            <br>
+            <a href="/"><u>Return to home page</u></a>
+
+        </div>
+
+        <%- include('./partials/foot.ejs') %>
+    </body>
+</html>

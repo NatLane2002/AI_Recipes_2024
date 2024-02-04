@@ -1,0 +1,37 @@
+<!-- recipe.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="icon" type="image/png" href="/myicon.jpg" />
+        <title>AI Meal Plans</title>
+        <%- include('./partials/styles.ejs') %> <%- include('./partials/head.ejs')
+        %>
+      </head>
+    <body>
+        
+        <div class="container">
+        <!-- Display Recipe Content -->
+        <div class="alignLeft">
+            <h1><u>Your Recipe</u></h1>
+            <p><%- recipe %></p>
+        </div>
+
+        <form action="/recipe/email" method="post">
+            <h3>Would you like to receive this delicious recipe directly in your inbox? Enter your email below!</h3>
+            <h6 class="loadingMsg">*Please stay on this page for at least 10 seconds to ensure you recieve your recipe*</h6>
+            <!-- <label for="email">Email:</label> -->
+            <input type="email" id="email" name="email" required>
+            <input type="hidden" name="recipe" value="<%= recipe %>">
+            <button type="submit">Send Recipe</button>
+        </form>
+
+        <!-- Button to Return to Home Page -->
+        <br>
+        <a href="/"><u>Return to home page</u></a>
+
+    </div>
+
+
+        <%- include('./partials/foot.ejs') %>
+    </body>
+</html>

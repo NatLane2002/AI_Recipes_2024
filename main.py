@@ -1,7 +1,7 @@
-# Authorization: Bearer "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"
+# Authorization: Bearer "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"
 
 import os
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "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"
 
 from openai import OpenAI
 

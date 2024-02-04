@@ -1,0 +1,25 @@
+<!-- home.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" type="image/png" href="/myicon.jpg" />
+    <title>AI Meal Plans</title>
+    <%- include('./partials/styles.ejs') %> <%- include('./partials/head.ejs')
+    %>
+  </head>
+  <body>
+    <div class="container">
+      <h1><u>AI Meal Plan Generator</u></h1>
+      <h3>Simplifying your meals, so you can focus on what matters most.</h3>
+      <!-- Get Started Button -->
+
+      <form class="btnForm" action="/meal-planner" method="get">
+        <button class="getStartedBtn" type="submit"><span class="text">Get Started</span><span>Enjoy</span></button>
+      </form>
+
+      <a class="disclaimerLink" href="/disclaimer"><u>Disclaimer</u></a>
+
+    </div>
+    <%- include('./partials/foot.ejs') %>
+  </body>
+</html>
