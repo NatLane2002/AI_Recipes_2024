@@ -23,7 +23,11 @@ router.post('/', async (req, res) => {
     try {
         const { meals } = req.body;
 
-        console.log(meals)
+        // Get the session user's name
+        const userName = req.session.userName;
+
+        // Log the user's request to the console first stating the user's name
+        console.log(`${userName} requested a recipe for ${meals}`);
 
         // Use the data to generate the recipe using OpenAI API
         const completion = await openai.chat.completions.create({
@@ -34,7 +38,7 @@ router.post('/', async (req, res) => {
         });
         
         res.render('recipe', { recipe: completion.choices[0].message.content.replace(/\n/g, '<br>') });
-        console.log(("Query Total Cost:", completion.usage.prompt_tokens / 1000) * 0.003 + (completion.usage.completion_tokens / 1000) * 0.006);
+        console.log(`${userName}'s Estimated Recipe Total Cost: ${(completion.usage.prompt_tokens / 1000) * 0.003 + (completion.usage.completion_tokens / 1000) * 0.006}`);
     } catch (error) {
         console.error('Error in generating recipe:', error.message);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -54,11 +58,14 @@ router.post('/email', async (req, res) => {
             html: `<p>${recipe}</p>`
         };
 
+        // Set the user's name in the session in order to personalize the log messages
+        userName = req.session.userName;
+
         // Send the email
         const info = await transporter.sendMail(mailOptions);
 
-        // Render the confirmation page
-        console.log('Email sent:', info.response);
+        // Log the email sent to the console
+        console.log(`Email sent to ${userName}: ${info.response}`);
     } catch (error) {
         console.error('Error:', error.message);
         res.status(500).send('Internal Server Error');

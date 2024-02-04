@@ -6,13 +6,18 @@
         <title>AI Meal Plans</title>
         <%- include('./partials/styles.ejs') %> <%- include('./partials/head.ejs')
         %>
-      </head>
+    </head>
     <body>
         <div class="container">
             <h1>Meal Planner</h1>
 
             <!-- Meal Planner Form -->
             <form action="/meal-planner/results" method="post">
+
+                <!-- Name -->
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
                 <!-- Diet Type -->
                 <label for="dietType">Diet Type:</label>
                 <select id="dietType" name="dietType">
@@ -21,14 +26,6 @@
                     <option value="low carb">Low Carb</option>
                     <option value="low fat">Low Fat</option>
                 </select>
-
-                <!-- Daily Caloric Intake -->
-                <label for="caloricIntake">Daily Caloric Intake:</label>
-                <input type="number" id="caloricIntake" name="caloricIntake" required>
-
-                <!-- Daily protein Intake -->
-                <label for="proteinIntake">Daily Protein Intake:</label>
-                <input type="number" id="proteinIntake" name="proteinIntake" required>
 
                 <!-- Number of Meals Preferred -->
                 <label for="numMeals">Number of Meals Preferred:</label>
@@ -40,6 +37,15 @@
                     <option value="5">5 Meals</option>
                     <option value="6">6 Meals</option>
                 </select>
+
+                <!-- Daily Caloric Intake -->
+                <label for="caloricIntake">Daily Caloric Intake:</label>
+                <input type="number" id="caloricIntake" name="caloricIntake" required>
+
+                <!-- Daily protein Intake -->
+                <label for="proteinIntake">Daily Protein Intake (Optional):<a class="questionMark" href="https://www.calculator.net/protein-calculator.html" target="_blank">?</a></label>
+                <input type="hidden" id="hiddenProteinIntake" name="proteinIntake" value="any">
+                <input type="number" id="proteinIntake" name="proteinIntake">
 
                 <!-- Allergies -->
                 <label for="allergies">Allergies (Optional):</label>
