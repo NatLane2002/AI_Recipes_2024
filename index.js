@@ -40,6 +40,11 @@ app.get('/disclaimer', (req, res) => {
     res.render('disclaimer');
 });
 
+// Version page
+app.get('/version', (req, res) => {
+    res.render('version');
+});
+
 // Routers
 
 const mealPlannerRouter = require('./routes/mealPlanner');

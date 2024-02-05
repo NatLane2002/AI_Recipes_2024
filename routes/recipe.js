@@ -65,7 +65,7 @@ router.post('/email', async (req, res) => {
         const info = await transporter.sendMail(mailOptions);
 
         // Log the email sent to the console
-        console.log(`Email sent to ${userName}: ${info.response}`);
+        console.log(`Email sent to ${userName} (${email}): ${info.response}`);
     } catch (error) {
         console.error('Error:', error.message);
         res.status(500).send('Internal Server Error');

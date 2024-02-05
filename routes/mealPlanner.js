@@ -42,10 +42,24 @@ router.post('/results', async (req, res) => {
         } = req.body;
 
         // Use the data to generate the meal plan using OpenAI API
+
+        // const completion = await openai.chat.completions.create({
+        //     model: "gpt-3.5-turbo",
+        //     messages: [
+        //         { role: "user", content: `Generate and then neatly format an exceptionally accurate and precise meal plan for a ${dietType} diet with ${caloricIntake} calories and ${proteinIntake} grams of protein, meticulously distributed across ${numMeals} meals per day. Exercise utmost care to avoid ${allergies} and exclude ${dislikedFoods}, while meticulously incorporating ${preferredFoods} in sensible moderation. I want the total protein and calorie amounts to be displayed after each meal neatly. After the meals, at the bottom, I would like the daily total for calories and protein. If any of the inputs are found to be invalid or the request is deemed infeasible, prioritize accuracy and return a short message stating why you cant complete the meal plan requested. Also its important to NOT include absolutely any text besides that of which makes up the meal plan itself. Thank you and do not forget to be exceptionally accurate with calories, protein and every other aspect of the request! And if the request is possible but maybe not healthy, please prioritize completing the request and then include a message at the end of the meal plan stating that the meal plan may not be healthy and that the user should consult a professional before following the meal plan. Thank you!`
+        //         },
+        //     ],
+        // });
+
+        // Your previous code...
+
         const completion = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
             messages: [
-                { role: "user", content: `Generate and then neatly format an exceptionally accurate and precise meal plan for a ${dietType} diet with ${caloricIntake} calories and ${proteinIntake} grams of protein, meticulously distributed across ${numMeals} meals per day. Exercise utmost care to avoid ${allergies} and exclude ${dislikedFoods}, while meticulously incorporating ${preferredFoods} in sensible moderation. I want the total protein and calorie amounts to be displayed after each meal neatly. After the meals, at the bottom, I would like the daily total for calories and protein. If any of the inputs are found to be invalid or the request is deemed infeasible, prioritize accuracy and return a short message stating why you cant complete the meal plan requested. Also its important to NOT include absolutely any text besides that of which makes up the meal plan itself. Thank you and do not forget to be exceptionally accurate with calories, protein and every other aspect of the request!`
+                {
+                    role: "user",
+                    content: `
+                        Generate an ultra precise and complete meal plan for a ${dietType} diet with ${caloricIntake} calories, ${proteinIntake} grams of protein, spread across ${numMeals} meals. Avoid ${allergies}, exclude ${dislikedFoods}, and include ${preferredFoods} in moderation. Display total calories and protein after each meal. Provide daily totals at the end. If infeasible, explain why. If not healthy, include a warning to consult a professional. Make sure that you prioritize calorie and protein accuracy, make sure the meal includes ${caloricIntake} calories and ${proteinIntake} grams of protein, if it does not, you will be terminated! Do not fail me!`
                 },
             ],
         });
@@ -85,7 +99,7 @@ router.post('/email', async (req, res) => {
         const info = await transporter.sendMail(mailOptions);
 
         // Log the email sent to the console
-        console.log(`Email sent to ${userName}: ${info.response}`);
+        console.log(`Email sent to ${userName} (${email}): ${info.response}`);
 
     } catch (error) {
         console.error('Error:', error.message);
